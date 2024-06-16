@@ -27,8 +27,8 @@ public class TurnoController {
     @PostMapping
     public ResponseEntity<Turno> guardarTurno(@RequestBody Turno turno){
         // Verifica que los pacientes existan
-        Optional<Paciente> pacienteBuscado = pacienteService.buscarPacientePorEmail(turno.getPaciente().getEmail());
-        Optional<Odontologo> odontologoBuscado= odontologoService.buscarOdontologoPorMatricula(turno.getOdontologo().getMatricula());
+        Optional<Paciente> pacienteBuscado = pacienteService.buscarPacientePorId(turno.getPaciente().getId());
+        Optional<Odontologo> odontologoBuscado= odontologoService.buscarOdontologoPorId(turno.getOdontologo().getId());
         if(odontologoBuscado.isPresent() && pacienteBuscado.isPresent()){
             System.out.println("ExistenEntra a guardarlos en caso de que ya esten");
             turno.setPaciente(pacienteBuscado.get());
@@ -37,9 +37,7 @@ public class TurnoController {
         }else{
             // En caso de que no esten registrado antes se crean tanto el paciente como
             System.out.println("Entra a guardarlos NO existen");
-            pacienteService.guardarPaciente(turno.getPaciente());
-            odontologoService.guardarOdontologo(turno.getOdontologo());
-            return turnoService.guardarTurno(turno);
+            return ResponseEntity.ok(turno);
             // por ahora devuelve el objeto tal cual se lo paso sin guardarlo en BD
         }
     }
