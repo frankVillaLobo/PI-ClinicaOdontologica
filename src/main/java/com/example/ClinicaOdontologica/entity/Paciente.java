@@ -24,8 +24,7 @@ public class Paciente {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "domicilio_id", referencedColumnName = "id")
     private Domicilio domicilio;
-
-    @Column(unique = true)
+    @Column(unique = true,nullable = false)
     private String email;
 
     public Paciente(Long id, String nombre, String apellido, String cedula, LocalDate fechaIngreso, Domicilio domicilio, String email) {
@@ -48,12 +47,6 @@ public class Paciente {
     }
     // Se deja un constructo en blanco para que Spring lo use como corresponda
     public Paciente(){}
-
-    /**
-     * Debo tener un constructor que no tenga relacionado un ID ya que habra ocasiones en las que puedo tener clientes a los cuales la base de dato les cree el id
-     * al ser autogenerada
-     * **/
-
 
     public Long getId() {
         return id;
@@ -102,6 +95,22 @@ public class Paciente {
     public void setDomicilio(Domicilio domicilio) {
         this.domicilio = domicilio;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * Debo tener un constructor que no tenga relacionado un ID ya que habra ocasiones en las que puedo tener clientes a los cuales la base de dato les cree el id
+     * al ser autogenerada
+     * **/
+
+
+
 
     @Override
     public String toString() {

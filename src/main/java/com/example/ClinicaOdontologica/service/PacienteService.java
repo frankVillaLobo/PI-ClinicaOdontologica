@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,13 +25,13 @@ public class PacienteService {
     }
 
     //buscarPorId
-    public ResponseEntity<Optional<Paciente>> buscarPacientePorId(Long id){
-        return ResponseEntity.ok(pacienteRepo.findById(id));
+    public Optional<Paciente> buscarPacientePorId(Long id){
+        return pacienteRepo.findById(id);
     }
 
     //buscarPorEmail
-    public ResponseEntity<Optional<Paciente>> buscarPacientePorEmail(String email){
-        return ResponseEntity.ok(pacienteRepo.findByEmail(email));
+    public Optional<Paciente> buscarPacientePorEmail(String email){
+        return pacienteRepo.findByEmail(email);
     }
 
     //eliminarPaciente
@@ -39,8 +40,8 @@ public class PacienteService {
     }
 
     //buscartodos
-    public ResponseEntity<List<Paciente>> buscarPacienteTodos(Long id){
-        return ResponseEntity.ok(pacienteRepo.findById(id));
+    public ResponseEntity<List<Paciente>> buscarPacienteTodos(){
+        return ResponseEntity.ok(pacienteRepo.findAll());
     }
 
 }
