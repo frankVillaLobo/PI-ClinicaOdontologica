@@ -20,13 +20,21 @@ public class PacienteController {
     // guardarPaciente
     @PostMapping
     public ResponseEntity<Paciente> guardarPaciente(@RequestBody Paciente paciente){
+        //Validamos que no este registrado el email
+        Optional<Paciente> pacienteBuscado = pacienteService.buscarPacientePorEmail(paciente.getEmail());
+        if(pacienteBuscado.isPresent()){
+            // por ahora devuelve el objeto tal cual se lo paso sin guardarlo en BD
+            return ResponseEntity.ok(paciente);
+        }
         return pacienteService.guardarPaciente(paciente);
     }
+
+
 
     // actulizarPaciente
     @PutMapping
     public ResponseEntity<Paciente> actualizarPaciente(@RequestBody Paciente paciente){
-        return pacienteService.guardarPaciente(paciente);
+        return pacienteService.actualizarPaciente(paciente);
     }
 
     //buscarTodos

@@ -24,6 +24,7 @@ public class Paciente {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "domicilio_id", referencedColumnName = "id")
     private Domicilio domicilio;
+    //Dejarlo en unique nos asegura que no se deben repetir, para eso hacemos la validacion en el controller
     @Column(unique = true,nullable = false)
     private String email;
 

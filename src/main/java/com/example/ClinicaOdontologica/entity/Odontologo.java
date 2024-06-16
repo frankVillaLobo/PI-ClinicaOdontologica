@@ -2,14 +2,13 @@ package com.example.ClinicaOdontologica.entity;
 
 import jakarta.persistence.*;
 
-
 @Entity
 @Table(name ="odontologos")
 public class Odontologo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column
+    @Column(unique = true,nullable = false)
     private String matricula;
     @Column
     private String nombre;
