@@ -67,7 +67,7 @@ function mostrarMensaje(mensaje, tipo) {
 }
 // Función para encontrar un turno por ID y llenar el formulario
 function findBy(id) {
-    const urlTurno = '/turnos/buscar/' + id;
+    const urlTurno = '/turnos/' + id;
     const settingsTurno = {
         method: 'GET'
     };
@@ -76,6 +76,7 @@ function findBy(id) {
     fetch(urlTurno, settingsTurno)
         .then(response => response.json())
         .then(turno => {
+            console.log(turno)
             document.querySelector('#turno_id').value = turno.id || '';
 
             // Obtener lista de todos los odontólogos
@@ -108,7 +109,7 @@ function findBy(id) {
                 });
 
             // Obtener lista de todos los pacientes
-            const urlPacientes = '/paciente';
+            const urlPacientes = '/pacientes';
             fetch(urlPacientes)
                 .then(response => response.json())
                 .then(pacientes => {

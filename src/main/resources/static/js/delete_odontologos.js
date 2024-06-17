@@ -1,7 +1,7 @@
 function deleteBy(id)
 {
     if (confirm("¿Estás seguro de que deseas eliminar este Odontologo?")) {
-          const url = '/odontologos/eliminar/'+ id;
+          const url = '/odontologos/'+ id;
           const settings = {
               method: 'DELETE'
           }

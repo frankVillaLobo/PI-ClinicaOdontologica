@@ -1,8 +1,10 @@
 function deleteBy(id) {
+
+    console.log("Entro al boton de eliminar paciente" )
     // Confirmación antes de eliminar
-    if (confirm("¿Estás seguro de que deseas eliminar este paciente?")) {
+    if (confirm("¿Estás seguro de que deseas eliminar este pacientes?")) {
         // Si el usuario confirma la eliminación
-        const url = '/paciente/eliminar/' + id;
+        const url = '/pacientes/' + id;
         const settings = {
             method: 'DELETE'
         };

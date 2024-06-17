@@ -1,7 +1,7 @@
 function deleteBy(id)
 {
     if (confirm("¿Estás seguro de que deseas eliminar este turno?")) {
-          const url = '/turnos/eliminar/'+ id;
+          const url = '/turnos/'+ id;
           const settings = {
               method: 'DELETE'
           }

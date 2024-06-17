@@ -43,12 +43,12 @@ public class TurnoController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Turno> buscarPacienteID(@PathVariable Long id){
+    public Optional<Turno> buscarTurnoPorId(@PathVariable Long id){
         return turnoService.buscarTurnoPorId(id);
     }
 
     @GetMapping
-    public ResponseEntity<List<Turno>> buscarTodos(){
+    public ResponseEntity<List<Turno>> buscarTurnoTodos(){
         return turnoService.buscarTurnoTodos();
     }
 
@@ -65,7 +65,7 @@ public class TurnoController {
         }
     }
 
-    @DeleteMapping("/eliminar/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminarTurno(@PathVariable Long id){
         Optional<Turno> turnoBuscado= turnoService.buscarTurnoPorId(id);
         if(turnoBuscado.isPresent()){
