@@ -3,6 +3,8 @@ package com.example.ClinicaOdontologica.controller;
 import com.example.ClinicaOdontologica.entity.Odontologo;
 import com.example.ClinicaOdontologica.entity.Paciente;
 import com.example.ClinicaOdontologica.entity.Turno;
+import com.example.ClinicaOdontologica.exception.BadRequestException;
+import com.example.ClinicaOdontologica.exception.ResourceNotFoundException;
 import com.example.ClinicaOdontologica.service.OdontologoService;
 import com.example.ClinicaOdontologica.service.PacienteService;
 import com.example.ClinicaOdontologica.service.TurnoService;
@@ -25,35 +27,42 @@ public class TurnoController {
     private PacienteService pacienteService;
 
     @PostMapping
-    public ResponseEntity<Turno> guardarTurno(@RequestBody Turno turno){
+    public ResponseEntity<Turno> guardarTurno(@RequestBody Turno turno)throws BadRequestException {
         // Verifica que los pacientes existan
         Optional<Paciente> pacienteBuscado = pacienteService.buscarPacientePorId(turno.getPaciente().getId());
         Optional<Odontologo> odontologoBuscado= odontologoService.buscarOdontologoPorId(turno.getOdontologo().getId());
         if(odontologoBuscado.isPresent() && pacienteBuscado.isPresent()){
-            System.out.println("ExistenEntra a guardarlos en caso de que ya esten");
             turno.setPaciente(pacienteBuscado.get());
             turno.setOdontologo(odontologoBuscado.get());
             return turnoService.guardarTurno(turno);
         }else{
             // En caso de que no esten registrado antes se crean tanto el paciente como
-            System.out.println("Entra a guardarlos NO existen");
-            return ResponseEntity.ok(turno);
+            throw new BadRequestException("Verifique la informacion");
             // por ahora devuelve el objeto tal cual se lo paso sin guardarlo en BD
         }
     }
 
     @GetMapping("/{id}")
-    public Optional<Turno> buscarTurnoPorId(@PathVariable Long id){
-        return turnoService.buscarTurnoPorId(id);
+    public Optional<Turno> buscarTurnoPorId(@PathVariable Long id)throws ResourceNotFoundException {
+        try{
+           return turnoService.buscarTurnoPorId(id);
+        }catch(Exception e){
+            throw new ResourceNotFoundException("No se encontro al turno con el ID: "+ id);
+        }
+
     }
 
     @GetMapping
-    public ResponseEntity<List<Turno>> buscarTurnoTodos(){
-        return turnoService.buscarTurnoTodos();
+    public ResponseEntity<List<Turno>> buscarTurnoTodos()throws ResourceNotFoundException{
+        try{
+            return turnoService.buscarTurnoTodos();
+        }catch(Exception e){
+            throw new ResourceNotFoundException("No se encuentran pacientes registrados");
+        }
     }
 
     @PutMapping
-    public ResponseEntity<Turno> actualizarTurno(@RequestBody Turno turno){
+    public ResponseEntity<Turno> actualizarTurno(@RequestBody Turno turno)throws BadRequestException{
         //necesitamos validar si existe el turno o no
         Optional<Turno> turnoBuscado= turnoService.buscarTurnoPorId(turno.getId());
         if(turnoBuscado.isPresent()){
@@ -61,18 +70,18 @@ public class TurnoController {
             return turnoService.actualizarTurno(turno);
         }else{
             // Si no lo encuentra lo devuelvo como objeto
-            return ResponseEntity.ok(turno);
+            throw new BadRequestException("NO hay un Turno con esas caracteristicas");
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminarTurno(@PathVariable Long id){
+    public ResponseEntity<String> eliminarTurno(@PathVariable Long id)throws ResourceNotFoundException{
         Optional<Turno> turnoBuscado= turnoService.buscarTurnoPorId(id);
         if(turnoBuscado.isPresent()){
             turnoService.eliminarTurno(id);
             return ResponseEntity.ok("Turno eliminado con exito");
         }else{
-            return ResponseEntity.ok("Turno NO encontrado");
+            throw new ResourceNotFoundException("No se encontro al turno con ID: "+ id);
         }
     }
 

@@ -57,6 +57,7 @@ window.addEventListener('load', function () {
 
                 const responseDiv = document.querySelector('#response');
                 let errorMessage = error.message;
+                console.log(errorMessage);
 
                 let errorAlert = '<div class="alert alert-danger alert-dismissible">' +
                     '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
