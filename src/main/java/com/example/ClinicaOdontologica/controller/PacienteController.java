@@ -5,7 +5,6 @@ import com.example.ClinicaOdontologica.exception.BadRequestException;
 import com.example.ClinicaOdontologica.exception.ResourceNotFoundException;
 import com.example.ClinicaOdontologica.service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +20,7 @@ public class PacienteController {
 
     // guardarPaciente
     @PostMapping
-    public ResponseEntity<Paciente> guardarPaciente(@RequestBody Paciente paciente)  throws BadRequestException {
+    public Paciente guardarPaciente(@RequestBody Paciente paciente)  throws BadRequestException {
         //Validamos que no este registrado el email
         Optional<Paciente> pacienteBuscado = pacienteService.buscarPacientePorEmail(paciente.getEmail());
         if(pacienteBuscado.isPresent()){

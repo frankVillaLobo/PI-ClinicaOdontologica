@@ -9,7 +9,7 @@ public class Turno {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
     @JoinColumn(name = "paciente_id" , referencedColumnName = "id")
     private Paciente paciente;
 
@@ -17,7 +17,7 @@ public class Turno {
      * Un turno puede tener solo un odontologo y un paciente pero tanto el odontologo como el paciente
      * pueden tener varias turnos (citas) en el dia.
      * **/
-    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
     @JoinColumn(name = "odontologo_id" , referencedColumnName = "id")
     private Odontologo odontologo;
     @Column

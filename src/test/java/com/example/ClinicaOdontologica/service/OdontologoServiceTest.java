@@ -25,7 +25,7 @@ public class OdontologoServiceTest {
     @Order(1)
     public void guardarOdontologo(){
         Odontologo odontologo = new Odontologo("M123","Fabio","Piedratita");
-        Odontologo odontologoGuardado = odontologoService.guardarOdontologo(odontologo).getBody();
+        Odontologo odontologoGuardado = odontologoService.guardarOdontologo(odontologo);
         assertEquals(1L,odontologoGuardado.getId());
     }
 

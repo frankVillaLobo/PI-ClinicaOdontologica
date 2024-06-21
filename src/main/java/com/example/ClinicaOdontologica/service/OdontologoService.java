@@ -2,6 +2,7 @@ package com.example.ClinicaOdontologica.service;
 
 import com.example.ClinicaOdontologica.entity.Odontologo;
 import com.example.ClinicaOdontologica.repository.OdontologoRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,8 +16,9 @@ public class OdontologoService {
     OdontologoRepository odontologoRepo;
 
     //guardar
-    public ResponseEntity<Odontologo> guardarOdontologo(Odontologo odontologo){
-        return ResponseEntity.ok(odontologoRepo.save(odontologo));
+    @Transactional
+    public Odontologo guardarOdontologo(Odontologo odontologo){
+        return odontologoRepo.save(odontologo);
     }
 
     //actualizar
@@ -25,6 +27,8 @@ public class OdontologoService {
     }
 
     //buscarPorId
+
+    @Transactional
     public Optional<Odontologo> buscarOdontologoPorId(Long id){
         return odontologoRepo.findById(id);
     }

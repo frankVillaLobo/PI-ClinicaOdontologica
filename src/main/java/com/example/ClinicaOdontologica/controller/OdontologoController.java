@@ -1,7 +1,6 @@
 package com.example.ClinicaOdontologica.controller;
 
 import com.example.ClinicaOdontologica.entity.Odontologo;
-import com.example.ClinicaOdontologica.entity.Paciente;
 import com.example.ClinicaOdontologica.exception.BadRequestException;
 import com.example.ClinicaOdontologica.exception.ResourceNotFoundException;
 import com.example.ClinicaOdontologica.service.OdontologoService;
@@ -20,7 +19,7 @@ public class OdontologoController {
 
     // guardarOdontologo
     @PostMapping
-    public ResponseEntity<Odontologo> guardarOdontologo(@RequestBody Odontologo odontologo)throws BadRequestException {
+    public Odontologo guardarOdontologo(@RequestBody Odontologo odontologo)throws BadRequestException {
         /**Antes de guardar un nuevo odontologo verificamos que no se repitan las matriculas como en el caso de
          * los email de los pacientes**/
         Optional<Odontologo> odontologoBuscado = odontologoService.buscarOdontologoPorMatricula(odontologo.getMatricula());

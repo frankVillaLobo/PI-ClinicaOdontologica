@@ -15,8 +15,8 @@ public class PacienteService {
     PacienteRepository pacienteRepo;
 
     //guardar
-    public ResponseEntity<Paciente> guardarPaciente(Paciente paciente){
-        return ResponseEntity.ok(pacienteRepo.save(paciente));
+    public Paciente guardarPaciente(Paciente paciente){
+        return pacienteRepo.save(paciente);
     }
 
     //actualizar

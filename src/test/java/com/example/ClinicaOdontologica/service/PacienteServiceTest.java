@@ -32,7 +32,7 @@ public class PacienteServiceTest {
     public void guardarPaciente(){
         Paciente paciente = new Paciente("Frank","Villa","123", LocalDate.of(2024,8,11),
                 new Domicilio("Avenida",123,"Teusaquillo","Bogota"),"frank@email.com");
-        Paciente pacienteGuardado = pacienteService.guardarPaciente(paciente).getBody();
+        Paciente pacienteGuardado = pacienteService.guardarPaciente(paciente);
         assertEquals(1L,pacienteGuardado.getId());
     }
 
