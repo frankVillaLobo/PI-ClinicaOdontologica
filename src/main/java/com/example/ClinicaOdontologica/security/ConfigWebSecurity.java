@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 
 import static org.springframework.security.authorization.AuthorityReactiveAuthorizationManager.hasRole;
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -35,13 +36,22 @@ public class ConfigWebSecurity {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http)throws Exception{
         http
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authz)->authz
-                .requestMatchers("/postPacientes.html").hasRole("USER")
-                                .requestMatchers("/postOdontologos/html","getOdontologos.html").hasRole("ADMIN")
+                        // Tengo que darles acceso al user a los endpoint al user para que pueda hacer get de las entidades
+                .requestMatchers("/pacientes", "/odontologos", "/turnos","/getPacientes.html","/getOdontologos.html","/getTurnos.html")
+                                .hasAnyRole("USER","ADMIN")
+                .requestMatchers("/pacientes", "/odontologos", "/turnos","/postPacientes.html","/postOdontologos.html","/postTurnos.html")
+                                .hasRole("ADMIN")
                 .anyRequest().authenticated()
                 )
-                .formLogin(withDefaults())
-                .logout(withDefaults());
+                .formLogin(form -> form
+                        .defaultSuccessUrl("/index.html", true) // Redirige a /home tras el login exitoso
+                )
+                // Configuración de cierre de sesión
+                .logout(withDefaults()
+                );
+
         return http.build();
     }
 }
