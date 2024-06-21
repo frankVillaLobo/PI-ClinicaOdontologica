@@ -1,5 +1,6 @@
 package com.example.ClinicaOdontologica.controller;
 
+import com.example.ClinicaOdontologica.dto.TurnoDTO;
 import com.example.ClinicaOdontologica.entity.Odontologo;
 import com.example.ClinicaOdontologica.entity.Paciente;
 import com.example.ClinicaOdontologica.entity.Turno;
@@ -27,7 +28,7 @@ public class TurnoController {
     private PacienteService pacienteService;
 
     @PostMapping
-    public ResponseEntity<Turno> guardarTurno(@RequestBody Turno turno)throws BadRequestException {
+    public TurnoDTO guardarTurno(@RequestBody Turno turno)throws BadRequestException {
         // Verifica que los pacientes existan
         Optional<Paciente> pacienteBuscado = pacienteService.buscarPacientePorId(turno.getPaciente().getId());
         Optional<Odontologo> odontologoBuscado= odontologoService.buscarOdontologoPorId(turno.getOdontologo().getId());
@@ -42,6 +43,7 @@ public class TurnoController {
         }
     }
 
+    // Ajustamos este metodo para implementar el DTO
     @GetMapping("/{id}")
     public Optional<Turno> buscarTurnoPorId(@PathVariable Long id)throws ResourceNotFoundException {
         try{
@@ -51,9 +53,9 @@ public class TurnoController {
         }
 
     }
-
+    // Ajustamos este metodo para implementar el DTO
     @GetMapping
-    public ResponseEntity<List<Turno>> buscarTurnoTodos()throws ResourceNotFoundException{
+    public List<TurnoDTO> buscarTurnoTodos()throws ResourceNotFoundException{
         try{
             return turnoService.buscarTurnoTodos();
         }catch(Exception e){

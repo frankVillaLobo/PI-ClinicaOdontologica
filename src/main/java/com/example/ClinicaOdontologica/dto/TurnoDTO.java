@@ -8,6 +8,16 @@ public class TurnoDTO {
     private Long pacienteId;
     private Long odontologoId;
 
+    public TurnoDTO(Long id, LocalDate fecha, Long pacienteId, Long odontologoId) {
+        this.id = id;
+        this.fecha = fecha;
+        this.pacienteId = pacienteId;
+        this.odontologoId = odontologoId;
+    }
+
+    public TurnoDTO() {
+    }
+
     public Long getId() {
         return id;
     }
