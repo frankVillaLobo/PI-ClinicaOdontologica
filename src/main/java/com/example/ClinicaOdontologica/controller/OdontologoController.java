@@ -47,7 +47,7 @@ public class OdontologoController {
     @GetMapping
     public ResponseEntity<List<Odontologo>> buscarOdontologoTodos()throws ResourceNotFoundException{
         try{
-            return odontologoService.buscarOdontologoTodos();
+            return ResponseEntity.ok(odontologoService.buscarOdontologoTodos());
         }catch(Exception e){
             throw new ResourceNotFoundException("No se encuentran odonotologos registrados");
         }

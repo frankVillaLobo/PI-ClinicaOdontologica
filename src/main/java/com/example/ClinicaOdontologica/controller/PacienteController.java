@@ -49,7 +49,7 @@ public class PacienteController {
     @GetMapping
     public ResponseEntity<List<Paciente>> buscarPacienteTodos()throws ResourceNotFoundException{
         try{
-            return pacienteService.buscarPacienteTodos();
+            return ResponseEntity.ok(pacienteService.buscarPacienteTodos());
         }catch(Exception e){
             throw new ResourceNotFoundException("No se encuentran pacientes registrados");
         }

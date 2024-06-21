@@ -36,8 +36,8 @@ public class OdontologoService {
     }
 
     //buscartodos
-    public ResponseEntity<List<Odontologo>> buscarOdontologoTodos(){
-        return ResponseEntity.ok(odontologoRepo.findAll());
+    public List<Odontologo> buscarOdontologoTodos(){
+        return odontologoRepo.findAll();
     }
 
     //buscarPorMatricula

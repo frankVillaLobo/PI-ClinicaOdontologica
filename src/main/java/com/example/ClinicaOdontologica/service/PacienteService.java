@@ -40,8 +40,8 @@ public class PacienteService {
     }
 
     //buscartodos
-    public ResponseEntity<List<Paciente>> buscarPacienteTodos(){
-        return ResponseEntity.ok(pacienteRepo.findAll());
+    public List<Paciente> buscarPacienteTodos(){
+        return (pacienteRepo.findAll());
     }
 
 }
