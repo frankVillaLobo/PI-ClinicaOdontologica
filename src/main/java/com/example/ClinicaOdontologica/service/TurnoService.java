@@ -50,12 +50,17 @@ public class TurnoService {
 
     // Ajustamos para implementar el DTO
     //buscartodos
-    public List<TurnoDTO> buscarTurnoTodos(){
+    public List<TurnoDTO> buscarTurnoTodosDTO(){
         List<Turno> listaTurnos = turnoRepo.findAll();
         List<TurnoDTO> listaTurnoDTO = new ArrayList<>();
         for (Turno turno : listaTurnos){
             listaTurnoDTO.add(turnoAturnoDTO(turno));
         }
         return listaTurnoDTO;
+    }
+
+    //buscartodos
+    public ResponseEntity<List<Turno>> buscarTurnoTodos(){
+        return ResponseEntity.ok(turnoRepo.findAll());
     }
 }

@@ -55,7 +55,7 @@ public class TurnoController {
     }
     // Ajustamos este metodo para implementar el DTO
     @GetMapping
-    public List<TurnoDTO> buscarTurnoTodos()throws ResourceNotFoundException{
+    public ResponseEntity<List<Turno>> buscarTurnoTodos()throws ResourceNotFoundException{
         try{
             return turnoService.buscarTurnoTodos();
         }catch(Exception e){
