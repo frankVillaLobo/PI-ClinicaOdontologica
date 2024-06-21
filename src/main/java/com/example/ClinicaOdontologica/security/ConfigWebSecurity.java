@@ -39,7 +39,7 @@ public class ConfigWebSecurity {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authz)->authz
                         // Tengo que darles acceso al user a los endpoint al user para que pueda hacer get de las entidades
-                .requestMatchers("/pacientes", "/odontologos", "/turnos","/getPacientes.html","/getOdontologos.html","/getTurnos.html")
+                .requestMatchers("/turnos","/getPacientes.html","/getOdontologos.html","/getTurnos.html")
                                 .hasAnyRole("USER","ADMIN")
                 .requestMatchers("/pacientes", "/odontologos", "/turnos","/postPacientes.html","/postOdontologos.html","/postTurnos.html")
                                 .hasRole("ADMIN")

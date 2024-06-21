@@ -4,6 +4,9 @@ Este proyecto es un software de gestión desarrollado como parte del trabajo int
 herramienta para la administración eficiente de una clínica odontológica, utilizando tecnologías como Spring Boot, H2 Database, y otras dependencias de Spring para 
 facilitar el CRUD y la integración del frontend básico.
 
+## Credenciales
+- Usuario admin. admin@correo.com --- password: admin
+- Usuario user. frank@correo.com --- password: frank
 ## Características
 
 - **Gestión de Pacientes**: Permite registrar, actualizar y listar pacientes.
