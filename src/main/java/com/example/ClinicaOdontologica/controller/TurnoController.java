@@ -1,6 +1,5 @@
 package com.example.ClinicaOdontologica.controller;
 
-import com.example.ClinicaOdontologica.dto.TurnoDTO;
 import com.example.ClinicaOdontologica.entity.Odontologo;
 import com.example.ClinicaOdontologica.entity.Paciente;
 import com.example.ClinicaOdontologica.entity.Turno;
@@ -28,7 +27,7 @@ public class TurnoController {
     private PacienteService pacienteService;
 
     @PostMapping
-    public TurnoDTO guardarTurno(@RequestBody Turno turno)throws BadRequestException {
+    public Turno guardarTurno(@RequestBody Turno turno)throws BadRequestException {
         // Verifica que los pacientes existan
         Optional<Paciente> pacienteBuscado = pacienteService.buscarPacientePorId(turno.getPaciente().getId());
         Optional<Odontologo> odontologoBuscado= odontologoService.buscarOdontologoPorId(turno.getOdontologo().getId());
@@ -64,15 +63,15 @@ public class TurnoController {
     }
 
     @PutMapping
-    public ResponseEntity<Turno> actualizarTurno(@RequestBody Turno turno)throws BadRequestException{
-        //necesitamos validar si existe el turno o no
+    public ResponseEntity<String> actualizarTurno(@RequestBody Turno turno) throws BadRequestException{
+        //necesitamos primeramente validar si existe o  no
         Optional<Turno> turnoBuscado= turnoService.buscarTurnoPorId(turno.getId());
         if(turnoBuscado.isPresent()){
-            //Lo elimino y luego lo creo otra vez
-            return turnoService.actualizarTurno(turno);
+            turnoService.eliminarTurno(turno.getId());
+            turnoService.guardarTurno(turno);
+            return ResponseEntity.ok("Turno actualizado con exito");
         }else{
-            // Si no lo encuentra lo devuelvo como objeto
-            throw new BadRequestException("NO hay un Turno con esas caracteristicas");
+            throw new BadRequestException("No se encontro el turno para actualizar");
         }
     }
 

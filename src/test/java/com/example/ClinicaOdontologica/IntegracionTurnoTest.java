@@ -44,7 +44,7 @@ public class IntegracionTurnoTest {
                 "jorgito@digitalhouse.com"));
         
         Odontologo odontologoGuardado= odontologoService.guardarOdontologo(new Odontologo("MP10","Ivan","Bustamante"));
-        TurnoDTO turnoGuardado= turnoService.guardarTurno(new Turno(pacienteGuardado,odontologoGuardado,LocalDate.of(2024,6,19)));
+        Turno turnoGuardado= turnoService.guardarTurno(new Turno(pacienteGuardado,odontologoGuardado,LocalDate.of(2024,6,19)));
     }
     @Test
     public void listarTodosLosTurnos() throws Exception{

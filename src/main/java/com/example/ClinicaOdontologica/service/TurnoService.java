@@ -1,14 +1,12 @@
 package com.example.ClinicaOdontologica.service;
 
 import com.example.ClinicaOdontologica.dto.TurnoDTO;
-import com.example.ClinicaOdontologica.entity.Paciente;
 import com.example.ClinicaOdontologica.entity.Turno;
 import com.example.ClinicaOdontologica.repository.TurnoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,18 +17,18 @@ public class TurnoService {
 
     // guardarTurno
     // Ajustamos para implementar el DTO
-    public TurnoDTO guardarTurno(Turno turno){
-        return turnoAturnoDTO(turnoRepo.save(turno));
+    public Turno guardarTurno(Turno turno){
+        return (turnoRepo.save(turno));
     }
     // Metodo publico para transformar un turno a un turno DTO. es como un object mapper manual
-    public TurnoDTO turnoAturnoDTO(Turno turno){
-        TurnoDTO turnoDto = new TurnoDTO();
-        turnoDto.setId(turnoDto.getId());
-        turnoDto.setFecha(turnoDto.getFecha());
-        turnoDto.setPacienteId(turno.getPaciente().getId());
-        turnoDto.setOdontologoId(turno.getOdontologo().getId());
-        return turnoDto;
-    }
+//    public TurnoDTO turnoAturnoDTO(Turno turno){
+//        TurnoDTO turnoDto = new TurnoDTO();
+//        turnoDto.setId(turnoDto.getId());
+//        turnoDto.setFecha(turnoDto.getFecha());
+//        turnoDto.setPacienteId(turno.getPaciente().getId());
+//        turnoDto.setOdontologoId(turno.getOdontologo().getId());
+//        return turnoDto;
+//    }
 
     // actualizarTurno
     public ResponseEntity<Turno> actualizarTurno(Turno turno){
@@ -50,13 +48,8 @@ public class TurnoService {
 
     // Ajustamos para implementar el DTO
     //buscartodos
-    public List<TurnoDTO> buscarTurnoTodosDTO(){
-        List<Turno> listaTurnos = turnoRepo.findAll();
-        List<TurnoDTO> listaTurnoDTO = new ArrayList<>();
-        for (Turno turno : listaTurnos){
-            listaTurnoDTO.add(turnoAturnoDTO(turno));
-        }
-        return listaTurnoDTO;
+    public List<Turno> buscarTurnoTodosDTO(){
+        return turnoRepo.findAll();
     }
 
     //buscartodos
